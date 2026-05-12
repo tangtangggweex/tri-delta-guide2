@@ -3,932 +3,1041 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>刀客传说 · 三角洲行动跑刀攻略</title>
-<meta name="description" content="三角洲行动最全跑刀攻略，路线规划、装备推荐、撤离技巧，让你成为战场上最强的刀客。">
+<title>三角洲跑刀指南 · 零号大坝 · 长弓溪谷 · 巴克什</title>
+<meta name="description" content="三角洲行动最专业跑刀攻略站，覆盖零号大坝、长弓溪谷、巴克什全地图跑刀路线、干员选择、收益分析，帮你每局稳赚不赔。">
+<meta name="keywords" content="三角洲行动,跑刀,攻略,零号大坝,长弓溪谷,巴克什,干员,蜂医,红狼,威龙">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Rajdhani:wght@400;600;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0a0b0d;
-    --bg2: #111318;
-    --bg3: #181c24;
-    --gold: #c8a84b;
-    --gold2: #e8c86a;
-    --gold-dim: #7a6030;
-    --red: #c0392b;
-    --red2: #e74c3c;
-    --green: #27ae60;
-    --text: #d4cfc4;
-    --text-dim: #8a8278;
-    --border: rgba(200,168,75,0.2);
-    --border-bright: rgba(200,168,75,0.6);
-  }
+:root {
+  --bg: #0d0e10;
+  --bg2: #13151a;
+  --bg3: #1a1d24;
+  --bg4: #20242e;
+  --accent: #e8b84b;
+  --accent2: #f5d06e;
+  --accent-dim: rgba(232,184,75,0.15);
+  --red: #e05252;
+  --green: #4caf7d;
+  --blue: #4a9eff;
+  --text: #c8c4bc;
+  --text2: #7a7670;
+  --border: rgba(232,184,75,0.12);
+  --border2: rgba(232,184,75,0.3);
+}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin:0; padding:0; box-sizing:border-box; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Noto Serif SC', serif;
-    overflow-x: hidden;
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M2 18 L12 2 L14 8 L18 4 L14 10 L18 12 Z' fill='%23c8a84b' stroke='%230a0b0d' stroke-width='1'/%3E%3C/svg%3E") 2 18, crosshair;
-  }
+html { scroll-behavior: smooth; }
 
-  /* ── NOISE OVERLAY ── */
-  body::before {
-    content: '';
-    position: fixed; inset: 0; z-index: 999; pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    opacity: 0.4;
-  }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    position: relative;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center;
-    overflow: hidden;
-    padding: 2rem;
-  }
+/* ── 顶部导航 ── */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:200;
+  background: rgba(13,14,16,0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem; height: 60px;
+}
+.nav-logo {
+  font-family: 'Oswald', sans-serif; font-weight: 700;
+  font-size: 1.1rem; letter-spacing: 0.12em;
+  color: var(--accent); text-decoration: none;
+}
+.nav-logo span { color: var(--text2); font-weight: 400; font-size: 0.8rem; margin-left: 8px; }
+.nav-menu { display:flex; gap:2rem; list-style:none; }
+.nav-menu a {
+  font-size: 0.82rem; letter-spacing: 0.08em;
+  color: var(--text2); text-decoration:none;
+  transition: color 0.2s;
+}
+.nav-menu a:hover { color: var(--accent); }
 
-  .hero-bg {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(200,168,75,0.06) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(192,57,43,0.08) 0%, transparent 60%),
-      linear-gradient(180deg, #0a0b0d 0%, #0f1218 50%, #0a0b0d 100%);
-  }
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  padding-top: 60px;
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset:0;
+  background:
+    linear-gradient(135deg, rgba(232,184,75,0.04) 0%, transparent 50%),
+    linear-gradient(to bottom, var(--bg) 0%, #0f1118 100%);
+}
+.hero-grid {
+  position: absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(232,184,75,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,184,75,0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 70% 80% at 20% 50%, black 20%, transparent 80%);
+}
+.hero-content {
+  position: relative; z-index:1;
+  max-width: 1200px; margin:0 auto; padding: 4rem 2.5rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 0.25em;
+  color: var(--accent); border: 1px solid var(--border2);
+  padding: 0.3rem 0.9rem; margin-bottom: 1.5rem;
+}
+.hero-tag::before { content:''; width:6px; height:6px; background:var(--accent); border-radius:50%; animation: blink 1.5s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(200,168,75,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(200,168,75,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
-  }
+.hero-title {
+  font-family: 'Oswald', sans-serif; font-weight: 700;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 1.05; letter-spacing: 0.03em;
+  color: #fff;
+  margin-bottom: 1.2rem;
+}
+.hero-title .hl { color: var(--accent); }
+.hero-desc {
+  font-size: 1rem; color: var(--text2); line-height: 1.8;
+  margin-bottom: 2rem; max-width: 480px;
+}
+.hero-btns { display:flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--accent); color: #0d0e10;
+  font-family: 'Oswald', sans-serif; font-weight: 600;
+  font-size: 0.85rem; letter-spacing: 0.1em;
+  padding: 0.75rem 1.8rem; text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+  border: none; cursor: pointer;
+}
+.btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+.btn-outline {
+  border: 1px solid var(--border2); color: var(--accent);
+  font-family: 'Oswald', sans-serif; font-weight: 600;
+  font-size: 0.85rem; letter-spacing: 0.1em;
+  padding: 0.75rem 1.8rem; text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-outline:hover { background: var(--accent-dim); }
 
-  .hero-badge {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--gold); border: 1px solid var(--border-bright);
-    padding: 0.35rem 1.2rem; margin-bottom: 2rem;
-    animation: fadeUp 0.8s ease both;
-    position: relative; z-index: 1;
-  }
+.hero-stats {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+}
+.stat-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  padding: 1.5rem;
+}
+.stat-card .num {
+  font-family: 'Oswald', sans-serif; font-weight: 700;
+  font-size: 2rem; color: var(--accent); display: block;
+}
+.stat-card .label { font-size: 0.78rem; color: var(--text2); letter-spacing: 0.05em; }
 
-  .hero-title {
-    font-family: 'Ma Shan Zheng', cursive;
-    font-size: clamp(3.5rem, 10vw, 8rem);
-    line-height: 1; letter-spacing: 0.05em;
-    color: var(--gold2);
-    text-shadow: 0 0 40px rgba(200,168,75,0.4), 0 0 80px rgba(200,168,75,0.1);
-    animation: fadeUp 0.8s 0.1s ease both;
-    position: relative; z-index: 1;
-  }
+/* ── AD BANNER ── */
+.ad-banner {
+  background: var(--bg2);
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 0.75rem 2.5rem;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+}
+.ad-tag {
+  font-size: 0.6rem; letter-spacing: 0.15em;
+  background: rgba(120,120,120,0.2); color: var(--text2);
+  padding: 2px 6px; flex-shrink: 0;
+}
+.ad-slot {
+  flex:1; max-width: 728px; height: 90px;
+  border: 1px dashed rgba(255,255,255,0.06);
+  display:flex; align-items:center; justify-content:center;
+  font-size: 0.78rem; color: var(--text2);
+}
 
-  .hero-sub {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(1rem, 2.5vw, 1.4rem);
-    letter-spacing: 0.2em; color: var(--text-dim);
-    margin: 1rem 0 2.5rem;
-    animation: fadeUp 0.8s 0.2s ease both;
-    position: relative; z-index: 1;
-  }
+/* ── SECTION COMMON ── */
+.section { padding: 5rem 0; }
+.section-alt { background: var(--bg2); }
+.container { max-width:1200px; margin:0 auto; padding:0 2.5rem; }
 
-  .hero-stats {
-    display: flex; gap: 3rem;
-    animation: fadeUp 0.8s 0.3s ease both;
-    position: relative; z-index: 1;
-  }
+.section-label {
+  font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 0.3em;
+  color: var(--accent); text-transform: uppercase; margin-bottom: 0.5rem;
+}
+.section-title {
+  font-family: 'Oswald', sans-serif; font-weight: 700;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: #fff; line-height: 1.2; margin-bottom: 1rem;
+}
+.section-desc { font-size: 0.9rem; color: var(--text2); max-width: 560px; }
 
-  .stat { text-align: center; }
-  .stat-num {
-    font-family: 'Rajdhani', sans-serif; font-weight: 700;
-    font-size: 2.2rem; color: var(--gold);
-    display: block;
-  }
-  .stat-label { font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.1em; }
+.section-header { margin-bottom: 3rem; }
 
-  .scroll-hint {
-    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
-    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-    color: var(--text-dim); font-size: 0.7rem; letter-spacing: 0.2em;
-    animation: pulse 2s infinite;
-    z-index: 1;
-  }
-  .scroll-hint::after {
-    content: ''; width: 1px; height: 40px;
-    background: linear-gradient(to bottom, var(--gold-dim), transparent);
-  }
+/* ── 干员推荐 ── */
+.agent-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem;
+}
+.agent-card {
+  background: var(--bg3); border: 1px solid var(--border);
+  padding: 1.8rem;
+  position: relative; overflow: hidden;
+  transition: border-color 0.3s, transform 0.2s;
+}
+.agent-card::before {
+  content:''; position:absolute; top:0; left:0;
+  width:100%; height:3px; background: var(--accent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s;
+}
+.agent-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.agent-card:hover::before { transform: scaleX(1); }
 
-  /* ── AD BANNER ── */
-  .ad-banner {
-    background: var(--bg2);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 1rem 2rem;
-    display: flex; align-items: center; justify-content: center;
-    gap: 1rem;
-    font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.1em;
-    position: relative;
-  }
-  .ad-label {
-    font-family: 'Rajdhani', sans-serif;
-    background: var(--gold-dim); color: var(--bg); padding: 0.15rem 0.4rem;
-    font-size: 0.6rem; letter-spacing: 0.15em; flex-shrink: 0;
-  }
-  .ad-slot {
-    flex: 1; max-width: 728px; height: 90px;
-    background: repeating-linear-gradient(
-      45deg, rgba(200,168,75,0.03) 0px, rgba(200,168,75,0.03) 10px,
-      transparent 10px, transparent 20px
-    );
-    border: 1px dashed rgba(200,168,75,0.15);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--text-dim); font-size: 0.8rem; letter-spacing: 0.1em;
-  }
+.agent-tier {
+  position: absolute; top: 1.2rem; right: 1.2rem;
+  font-family: 'Oswald', sans-serif; font-weight: 700;
+  font-size: 0.65rem; letter-spacing: 0.1em;
+  padding: 3px 8px;
+}
+.tier-s { background: rgba(232,184,75,0.15); color: var(--accent); }
+.tier-a { background: rgba(74,158,255,0.15); color: var(--blue); }
 
-  /* ── SECTION ── */
-  section { padding: 5rem 0; }
+.agent-name {
+  font-family: 'Oswald', sans-serif; font-weight: 700;
+  font-size: 1.4rem; color: #fff; margin-bottom: 0.2rem;
+}
+.agent-role { font-size: 0.75rem; color: var(--text2); letter-spacing: 0.05em; margin-bottom: 1rem; }
+.agent-desc { font-size: 0.85rem; color: var(--text); line-height: 1.7; margin-bottom: 1.2rem; }
 
-  .container {
-    max-width: 1100px; margin: 0 auto; padding: 0 2rem;
-  }
+.agent-tags { display:flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-size: 0.7rem; padding: 3px 10px; border: 1px solid;
+  letter-spacing: 0.05em;
+}
+.tag-gold { border-color: rgba(232,184,75,0.4); color: var(--accent); }
+.tag-blue { border-color: rgba(74,158,255,0.4); color: var(--blue); }
+.tag-green { border-color: rgba(76,175,125,0.4); color: var(--green); }
+.tag-red { border-color: rgba(224,82,82,0.4); color: var(--red); }
 
-  .section-header {
-    display: flex; align-items: center; gap: 1.5rem; margin-bottom: 3rem;
-  }
-  .section-num {
-    font-family: 'Rajdhani', sans-serif; font-weight: 700;
-    font-size: 4rem; color: var(--border); line-height: 1;
-    flex-shrink: 0;
-  }
-  .section-titles h2 {
-    font-family: 'Ma Shan Zheng', cursive;
-    font-size: 2rem; color: var(--gold2);
-  }
-  .section-titles p { font-size: 0.85rem; color: var(--text-dim); letter-spacing: 0.1em; margin-top: 0.3rem; }
+/* ── 地图攻略 ── */
+.map-tabs {
+  display:flex; gap:0; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem;
+}
+.map-tab {
+  background:none; border:none; color: var(--text2);
+  font-family: 'Noto Sans SC', sans-serif; font-size: 0.9rem;
+  padding: 0.9rem 1.8rem; cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.map-tab:hover { color: var(--text); }
+.map-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-  /* ── MINDSET ── */
-  .mindset-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;
-  }
+.map-panel { display:none; }
+.map-panel.active { display:grid; grid-template-columns: 1fr 340px; gap: 2.5rem; align-items: start; }
+@media(max-width:768px){ .map-panel.active { grid-template-columns: 1fr; } }
 
-  .mindset-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    padding: 2rem;
-    position: relative;
-    transition: border-color 0.3s, transform 0.3s;
-    overflow: hidden;
-  }
-  .mindset-card::before {
-    content: ''; position: absolute; top: 0; left: 0;
-    width: 3px; height: 100%;
-    background: var(--gold);
-  }
-  .mindset-card:hover { border-color: var(--border-bright); transform: translateY(-3px); }
+.map-routes { display:flex; flex-direction:column; gap: 1.2rem; }
+.route-item {
+  background: var(--bg3); border: 1px solid var(--border);
+  padding: 1.5rem;
+  display: grid; grid-template-columns: auto 1fr; gap: 1.2rem;
+  align-items: flex-start;
+  transition: border-color 0.2s;
+}
+.route-item:hover { border-color: var(--border2); }
+.route-num {
+  font-family: 'Oswald', sans-serif; font-weight: 700;
+  font-size: 2rem; color: var(--border2); line-height: 1; flex-shrink:0;
+}
+.route-title { font-size: 1rem; color: #fff; font-weight: 500; margin-bottom: 0.4rem; }
+.route-body { font-size: 0.83rem; color: var(--text2); line-height: 1.75; margin-bottom: 0.8rem; }
+.route-meta { display:flex; gap:8px; flex-wrap:wrap; }
+.meta-pill {
+  font-size: 0.68rem; padding: 2px 10px; letter-spacing: 0.05em;
+  border: 1px solid;
+}
+.pill-green { border-color: rgba(76,175,125,0.4); color: var(--green); }
+.pill-yellow { border-color: rgba(232,184,75,0.4); color: var(--accent); }
+.pill-red { border-color: rgba(224,82,82,0.4); color: var(--red); }
 
-  .card-icon { font-size: 2rem; margin-bottom: 1rem; }
-  .card-title { font-size: 1.1rem; color: var(--gold); margin-bottom: 0.75rem; }
-  .card-body { font-size: 0.875rem; line-height: 1.8; color: var(--text-dim); }
+.map-sidebar {}
+.sidebar-card {
+  background: var(--bg3); border: 1px solid var(--border); padding: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+.sidebar-title {
+  font-family: 'Oswald', sans-serif; font-size: 0.85rem; letter-spacing: 0.1em;
+  color: var(--accent); margin-bottom: 1rem;
+}
+.key-list { list-style: none; }
+.key-list li {
+  display:flex; justify-content: space-between; align-items: center;
+  padding: 0.5rem 0; border-bottom: 1px solid var(--border);
+  font-size: 0.82rem;
+}
+.key-list li:last-child { border:none; }
+.key-name { color: var(--text); }
+.key-val { color: var(--accent); font-family: 'Oswald', sans-serif; font-size: 0.9rem; }
+.key-stars { color: var(--accent); font-size: 0.75rem; }
 
-  /* ── ROUTES ── */
-  .routes-section { background: var(--bg2); }
+.income-bar {
+  display:flex; flex-direction:column; gap: 0.8rem;
+}
+.income-row {}
+.income-label { display:flex; justify-content:space-between; font-size: 0.78rem; margin-bottom: 4px; }
+.income-label span:first-child { color: var(--text); }
+.income-label span:last-child { color: var(--accent); font-family: 'Oswald', sans-serif; }
+.income-track { height: 4px; background: var(--bg4); border-radius: 2px; overflow:hidden; }
+.income-fill { height:100%; background: linear-gradient(to right, var(--accent), var(--accent2)); border-radius:2px; }
 
-  .tab-nav {
-    display: flex; gap: 0; margin-bottom: 2rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .tab-btn {
-    background: none; border: none; color: var(--text-dim);
-    font-family: 'Noto Serif SC', serif; font-size: 0.9rem;
-    padding: 0.75rem 1.5rem; cursor: pointer;
-    border-bottom: 2px solid transparent; margin-bottom: -1px;
-    transition: color 0.2s, border-color 0.2s;
-  }
-  .tab-btn:hover { color: var(--gold); }
-  .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+/* ── 技巧 ── */
+.tips-layout {
+  display: grid; grid-template-columns: 1fr 300px; gap: 2.5rem; align-items: start;
+}
+@media(max-width:768px){ .tips-layout { grid-template-columns:1fr; } }
 
-  .tab-content { display: none; }
-  .tab-content.active { display: block; }
+.tips-list { display:flex; flex-direction:column; gap: 1px; }
+.tip-item {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: 1.4rem 1.6rem;
+  display: grid; grid-template-columns: 40px 1fr; gap: 1rem; align-items: flex-start;
+  transition: background 0.2s;
+  margin-bottom: 0.5rem;
+}
+.tip-item:hover { background: var(--bg3); }
+.tip-num {
+  font-family: 'Oswald', sans-serif; font-weight: 700;
+  font-size: 1.2rem; color: var(--accent); line-height: 1.4;
+}
+.tip-title { font-size: 0.95rem; color: #fff; font-weight: 500; margin-bottom: 0.3rem; }
+.tip-body { font-size: 0.83rem; color: var(--text2); line-height: 1.75; }
 
-  .route-card {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
-    background: var(--bg3); border: 1px solid var(--border); padding: 2rem;
-  }
-  @media(max-width: 640px){ .route-card { grid-template-columns: 1fr; } }
+.ad-side-wrap { position: sticky; top: 80px; display:flex; flex-direction:column; gap:1rem; }
+.ad-side {
+  background: var(--bg2); border: 1px solid var(--border);
+  padding: 0.75rem;
+  display:flex; flex-direction:column; align-items:center; gap: 6px;
+}
+.ad-side-slot {
+  width: 100%; height: 250px;
+  border: 1px dashed rgba(255,255,255,0.06);
+  display:flex; align-items:center; justify-content:center;
+  font-size: 0.72rem; color: var(--text2); text-align:center; padding: 1rem;
+}
 
-  .route-map {
-    aspect-ratio: 1; background: var(--bg);
-    border: 1px solid var(--border);
-    position: relative; overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
-  }
+/* ── 收益计算 ── */
+.income-section {}
+.income-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+}
+@media(max-width:768px){ .income-grid { grid-template-columns:1fr; } }
 
-  .route-map svg { width: 100%; height: 100%; }
+.income-card {
+  background: var(--bg3); border: 1px solid var(--border);
+  padding: 2rem;
+}
+.income-card .map-name {
+  font-family: 'Oswald', sans-serif; font-weight: 700;
+  font-size: 1.2rem; color: #fff; margin-bottom: 0.2rem;
+}
+.income-card .map-mode { font-size: 0.75rem; color: var(--text2); letter-spacing: 0.05em; margin-bottom: 1.5rem; }
+.income-card .income-num {
+  font-family: 'Oswald', sans-serif; font-weight: 700;
+  font-size: 2rem; color: var(--accent); display:block; margin-bottom: 0.2rem;
+}
+.income-card .income-unit { font-size: 0.75rem; color: var(--text2); margin-bottom: 1rem; }
+.income-detail { font-size: 0.8rem; color: var(--text2); line-height: 1.9; }
+.income-detail span { color: var(--text); }
 
-  .route-info h3 { font-size: 1.2rem; color: var(--gold); margin-bottom: 1rem; }
-  .route-meta {
-    display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;
-  }
-  .meta-tag {
-    font-family: 'Rajdhani', sans-serif; font-size: 0.75rem;
-    letter-spacing: 0.1em; padding: 0.25rem 0.75rem;
-    border: 1px solid var(--border);
-  }
-  .meta-tag.danger { border-color: var(--red); color: var(--red); }
-  .meta-tag.safe { border-color: var(--green); color: var(--green); }
-  .meta-tag.gold { border-color: var(--gold-dim); color: var(--gold); }
+.risk-badge {
+  display: inline-block; font-size: 0.65rem; letter-spacing: 0.1em;
+  padding: 3px 10px; margin-bottom: 1rem; border: 1px solid;
+}
+.risk-low { border-color: rgba(76,175,125,0.5); color: var(--green); }
+.risk-mid { border-color: rgba(232,184,75,0.5); color: var(--accent); }
+.risk-high { border-color: rgba(224,82,82,0.5); color: var(--red); }
 
-  .route-steps { list-style: none; }
-  .route-steps li {
-    display: flex; gap: 1rem; align-items: flex-start;
-    padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.04);
-    font-size: 0.875rem; line-height: 1.6;
-  }
-  .step-num {
-    font-family: 'Rajdhani', sans-serif; font-weight: 700;
-    color: var(--gold); flex-shrink: 0; width: 20px;
-  }
+/* ── FAQ ── */
+.faq-list { display:flex; flex-direction:column; gap: 1px; }
+.faq-item {
+  border: 1px solid var(--border); background: var(--bg3);
+  margin-bottom: 0.5rem;
+}
+.faq-q {
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 1.2rem 1.5rem; cursor: pointer;
+  font-size: 0.95rem; color: #fff; font-weight: 500;
+  user-select: none;
+}
+.faq-q::after {
+  content: '+'; font-size: 1.4rem; color: var(--accent);
+  transition: transform 0.3s; flex-shrink:0; margin-left:1rem;
+}
+.faq-item.open .faq-q::after { transform: rotate(45deg); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  font-size: 0.85rem; color: var(--text2); line-height: 1.8;
+  transition: max-height 0.4s ease, padding 0.3s;
+  padding: 0 1.5rem;
+}
+.faq-item.open .faq-a { max-height: 300px; padding: 0 1.5rem 1.2rem; }
 
-  /* ── TIPS GRID ── */
-  .tips-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem;
-  }
+/* ── FOOTER ── */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--border);
+  padding: 3rem 2.5rem 2rem;
+}
+.footer-inner { max-width:1200px; margin:0 auto; }
+.footer-top {
+  display:flex; justify-content:space-between; align-items:flex-start;
+  gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem;
+  padding-bottom: 2rem; border-bottom: 1px solid var(--border);
+}
+.footer-brand .logo {
+  font-family: 'Oswald', sans-serif; font-weight: 700;
+  font-size: 1.3rem; color: var(--accent); margin-bottom: 0.5rem;
+}
+.footer-brand p { font-size: 0.8rem; color: var(--text2); max-width: 260px; }
+.footer-links h4 {
+  font-family: 'Oswald', sans-serif; font-size: 0.8rem; letter-spacing: 0.15em;
+  color: var(--text2); margin-bottom: 0.8rem;
+}
+.footer-links ul { list-style:none; display:flex; flex-direction:column; gap:0.4rem; }
+.footer-links a { font-size: 0.82rem; color: var(--text2); text-decoration:none; transition:color 0.2s; }
+.footer-links a:hover { color: var(--accent); }
+.footer-bottom {
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;
+}
+.footer-copy { font-size: 0.75rem; color: var(--text2); opacity: 0.5; }
+.icp { font-size: 0.72rem; color: var(--text2); opacity: 0.4; }
 
-  .tip-card {
-    border: 1px solid var(--border); background: var(--bg2);
-    padding: 1.5rem;
-    display: flex; gap: 1rem;
-    transition: background 0.2s;
-  }
-  .tip-card:hover { background: var(--bg3); }
-  .tip-icon { font-size: 1.5rem; flex-shrink: 0; }
-  .tip-text h4 { font-size: 0.95rem; color: var(--gold2); margin-bottom: 0.4rem; }
-  .tip-text p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.7; }
-
-  /* ── GEAR TABLE ── */
-  .gear-section { background: var(--bg2); }
-  .gear-table {
-    width: 100%; border-collapse: collapse;
-  }
-  .gear-table th {
-    font-family: 'Rajdhani', sans-serif; letter-spacing: 0.1em;
-    text-align: left; padding: 0.75rem 1rem;
-    background: var(--bg3); color: var(--gold);
-    border-bottom: 1px solid var(--border-bright);
-    font-size: 0.85rem;
-  }
-  .gear-table td {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--border);
-    font-size: 0.85rem; color: var(--text-dim);
-  }
-  .gear-table tr:hover td { background: var(--bg3); color: var(--text); }
-  .gear-table .name { color: var(--text); }
-  .stars { color: var(--gold); letter-spacing: -0.1em; }
-
-  /* ── AD SIDE ── */
-  .content-with-ad {
-    display: grid; grid-template-columns: 1fr 240px; gap: 2rem; align-items: start;
-  }
-  @media(max-width: 768px) { .content-with-ad { grid-template-columns: 1fr; } }
-
-  .ad-side {
-    background: var(--bg2); border: 1px solid var(--border); padding: 1rem;
-    text-align: center; position: sticky; top: 2rem;
-  }
-  .ad-side .ad-label { display: inline-block; margin-bottom: 0.5rem; }
-  .ad-side-slot {
-    width: 100%; height: 250px;
-    background: repeating-linear-gradient(
-      45deg, rgba(200,168,75,0.03) 0px, rgba(200,168,75,0.03) 10px,
-      transparent 10px, transparent 20px
-    );
-    border: 1px dashed rgba(200,168,75,0.15);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--text-dim); font-size: 0.75rem;
-    margin-top: 0.5rem;
-  }
-
-  /* ── DANGER ZONES ── */
-  .zone-list {
-    display: grid; gap: 1rem;
-  }
-  .zone-item {
-    display: flex; gap: 1.5rem; align-items: flex-start;
-    background: var(--bg2); border: 1px solid var(--border); padding: 1.5rem;
-  }
-  .zone-level {
-    flex-shrink: 0; width: 60px; height: 60px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Rajdhani', sans-serif; font-weight: 700;
-    font-size: 1.5rem;
-  }
-  .zone-level.high { background: rgba(192,57,43,0.15); color: var(--red2); border: 1px solid var(--red); }
-  .zone-level.med { background: rgba(200,168,75,0.1); color: var(--gold); border: 1px solid var(--gold-dim); }
-  .zone-level.low { background: rgba(39,174,96,0.1); color: var(--green); border: 1px solid var(--green); }
-  .zone-info h4 { font-size: 1rem; color: var(--text); margin-bottom: 0.4rem; }
-  .zone-info p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.7; }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--bg2);
-    border-top: 1px solid var(--border);
-    padding: 3rem 2rem 2rem;
-    text-align: center;
-  }
-  .footer-logo {
-    font-family: 'Ma Shan Zheng', cursive;
-    font-size: 2rem; color: var(--gold); margin-bottom: 0.5rem;
-  }
-  .footer-links {
-    display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
-    margin: 1.5rem 0;
-  }
-  .footer-links a { color: var(--text-dim); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--gold); }
-  .footer-copy { font-size: 0.75rem; color: var(--text-dim); opacity: 0.5; }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1rem 2rem;
-    background: rgba(10,11,13,0.9); backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    transition: all 0.3s;
-  }
-  .nav-logo {
-    font-family: 'Ma Shan Zheng', cursive;
-    font-size: 1.3rem; color: var(--gold); text-decoration: none;
-  }
-  .nav-links {
-    display: flex; gap: 1.5rem; list-style: none;
-  }
-  .nav-links a {
-    font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; letter-spacing: 0.1em;
-    color: var(--text-dim); text-decoration: none; transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--gold); }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 0.5; } 50% { opacity: 1; }
-  }
-
-  .reveal {
-    opacity: 0; transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* ── DIVIDER ── */
-  .divider {
-    border: none; height: 1px;
-    background: linear-gradient(to right, transparent, var(--border-bright), transparent);
-    margin: 0;
-  }
+/* ── REVEAL ── */
+.reveal { opacity:0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+.reveal.in { opacity:1; transform:translateY(0); }
 </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8004485070339929"
-     crossorigin="anonymous"></script></head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8004485070339929" crossorigin="anonymous"></script>
+</head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">刀客传说</a>
-  <ul class="nav-links">
-    <li><a href="#basics">入门</a></li>
-    <li><a href="#routes">路线</a></li>
-    <li><a href="#tips">技巧</a></li>
-    <li><a href="#gear">装备</a></li>
-    <li><a href="#zones">区域</a></li>
+  <a href="#" class="nav-logo">三角洲跑刀指南 <span>DELTA RUNNER GUIDE</span></a>
+  <ul class="nav-menu">
+    <li><a href="#agents">干员选择</a></li>
+    <li><a href="#maps">地图攻略</a></li>
+    <li><a href="#tips">实战技巧</a></li>
+    <li><a href="#income">收益分析</a></li>
+    <li><a href="#faq">常见问题</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<div class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
-  <div class="hero-badge">DELTA FORCE · RUNNER GUIDE · 2024</div>
-  <h1 class="hero-title">刀客传说</h1>
-  <p class="hero-sub">三角洲行动 · 跑刀玩家终极攻略</p>
-  <div class="hero-stats">
-    <div class="stat"><span class="stat-num">12+</span><span class="stat-label">路线详解</span></div>
-    <div class="stat"><span class="stat-num">50+</span><span class="stat-label">实战技巧</span></div>
-    <div class="stat"><span class="stat-num">∞</span><span class="stat-label">不断更新</span></div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-tag">S7赛季持续更新</div>
+      <h1 class="hero-title">三角洲行动<br><span class="hl">跑刀完全指南</span></h1>
+      <p class="hero-desc">覆盖零号大坝、长弓溪谷、巴克什三大地图，从干员选择到路线规划，帮你每局稳定撤离，告别亏本跑刀。</p>
+      <div class="hero-btns">
+        <a href="#maps" class="btn-primary">查看地图攻略</a>
+        <a href="#agents" class="btn-outline">干员推荐</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <span class="num">3</span>
+        <span class="label">地图详细攻略</span>
+      </div>
+      <div class="stat-card">
+        <span class="num">20万+</span>
+        <span class="label">普坝每局收益</span>
+      </div>
+      <div class="stat-card">
+        <span class="num">4</span>
+        <span class="label">主流跑刀干员</span>
+      </div>
+      <div class="stat-card">
+        <span class="num">7分钟</span>
+        <span class="label">标准跑刀时长</span>
+      </div>
+    </div>
   </div>
-  <div class="scroll-hint">向下探索</div>
-</section>
-
-<!-- AD BANNER TOP -->
-<div class="ad-banner">
-  <span class="ad-label">广告</span>
-  <div class="ad-slot">[ 728×90 横幅广告位 · 此处接入 Google AdSense 代码 ]</div>
 </div>
 
-<!-- BASICS -->
-<section id="basics">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="section-num">01</span>
-      <div class="section-titles">
-        <h2>跑刀心法</h2>
-        <p>THE RUNNER'S MINDSET — 生存哲学与核心理念</p>
-      </div>
-    </div>
-    <div class="mindset-grid">
-      <div class="mindset-card reveal">
-        <div class="card-icon">⚡</div>
-        <h3 class="card-title">速度即生命</h3>
-        <p class="card-body">跑刀的核心在于速度，不携带重型武器意味着更快的移动速度。利用这个优势在敌人开枪之前完成目标，永远不要在开阔地带停留超过3秒。</p>
-      </div>
-      <div class="mindset-card reveal">
-        <div class="card-icon">🎯</div>
-        <h3 class="card-title">目标优先级</h3>
-        <p class="card-body">物资 > 任务物品 > 交战。跑刀不是逃避战斗，而是战略性地选择战斗。遭遇武装玩家时，判断战机，果断决定进攻或规避。</p>
-      </div>
-      <div class="mindset-card reveal">
-        <div class="card-icon">🗺️</div>
-        <h3 class="card-title">地图即武器</h3>
-        <p class="card-body">熟悉每一条小路、每一扇门、每一个掩体的位置。地图知识是跑刀玩家最强大的武器，比任何枪械都更能保证你的存活率。</p>
-      </div>
-      <div class="mindset-card reveal">
-        <div class="card-icon">👁️</div>
-        <h3 class="card-title">声音意识</h3>
-        <p class="card-body">脚步声、开门声、枪声，每一个声音都是情报。跑刀玩家必须养成实时声音分析的习惯，通过声音判断敌人位置和数量。</p>
-      </div>
-      <div class="mindset-card reveal">
-        <div class="card-icon">💰</div>
-        <h3 class="card-title">收益计算</h3>
-        <p class="card-body">每次出发前规划好目标物资，计算风险收益比。不要为了贪图高价值物资而走险路。稳定的低风险收益长期来看远优于高风险赌博。</p>
-      </div>
-      <div class="mindset-card reveal">
-        <div class="card-icon">🔄</div>
-        <h3 class="card-title">撤离即胜利</h3>
-        <p class="card-body">活着回来才算赢。无论包里装了多少好物资，死亡归零就是亏损。培养"撤离优先"的意识，永远为自己留好退路。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- ROUTES -->
-<section id="routes" class="routes-section">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="section-num">02</span>
-      <div class="section-titles">
-        <h2>路线图解</h2>
-        <p>ROUTE PLANNING — 经典跑刀路线详细解析</p>
-      </div>
-    </div>
-
-    <div class="tab-nav">
-      <button class="tab-btn active" onclick="switchTab('route1', this)">边缘速通线</button>
-      <button class="tab-btn" onclick="switchTab('route2', this)">物资收集线</button>
-      <button class="tab-btn" onclick="switchTab('route3', this)">任务冲刺线</button>
-    </div>
-
-    <div id="route1" class="tab-content active reveal">
-      <div class="route-card">
-        <div class="route-map">
-          <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-                <path d="M0,0 L0,6 L8,3 Z" fill="#c8a84b"/>
-              </marker>
-            </defs>
-            <!-- Grid -->
-            <rect width="300" height="300" fill="#0f1218"/>
-            <line x1="0" y1="100" x2="300" y2="100" stroke="rgba(200,168,75,0.08)" stroke-width="1"/>
-            <line x1="0" y1="200" x2="300" y2="200" stroke="rgba(200,168,75,0.08)" stroke-width="1"/>
-            <line x1="100" y1="0" x2="100" y2="300" stroke="rgba(200,168,75,0.08)" stroke-width="1"/>
-            <line x1="200" y1="0" x2="200" y2="300" stroke="rgba(200,168,75,0.08)" stroke-width="1"/>
-            <!-- Terrain -->
-            <rect x="20" y="20" width="60" height="40" rx="4" fill="rgba(200,168,75,0.06)" stroke="rgba(200,168,75,0.2)" stroke-width="1"/>
-            <text x="50" y="44" fill="rgba(200,168,75,0.5)" font-size="8" text-anchor="middle" font-family="monospace">建筑A</text>
-            <rect x="220" y="60" width="60" height="50" rx="4" fill="rgba(200,168,75,0.06)" stroke="rgba(200,168,75,0.2)" stroke-width="1"/>
-            <text x="250" y="88" fill="rgba(200,168,75,0.5)" font-size="8" text-anchor="middle" font-family="monospace">建筑B</text>
-            <rect x="100" y="160" width="80" height="60" rx="4" fill="rgba(192,57,43,0.08)" stroke="rgba(192,57,43,0.3)" stroke-width="1"/>
-            <text x="140" y="193" fill="rgba(192,57,43,0.6)" font-size="8" text-anchor="middle" font-family="monospace">热区</text>
-            <rect x="20" y="230" width="50" height="50" rx="4" fill="rgba(39,174,96,0.1)" stroke="rgba(39,174,96,0.3)" stroke-width="1"/>
-            <text x="45" y="258" fill="rgba(39,174,96,0.6)" font-size="8" text-anchor="middle" font-family="monospace">撤离点</text>
-            <!-- Route -->
-            <polyline points="50,270 50,200 30,120 50,60 100,40 130,40" 
-              fill="none" stroke="#c8a84b" stroke-width="2" 
-              stroke-dasharray="6,3" marker-end="url(#arrow)" opacity="0.8"/>
-            <!-- Points -->
-            <circle cx="50" cy="270" r="5" fill="#27ae60"/>
-            <text x="60" y="274" fill="#27ae60" font-size="9" font-family="monospace">起点</text>
-            <circle cx="50" cy="200" r="4" fill="#c8a84b"/>
-            <circle cx="30" cy="120" r="4" fill="#c8a84b"/>
-            <circle cx="50" cy="60" r="4" fill="#c8a84b"/>
-            <circle cx="130" cy="40" r="5" fill="#e74c3c"/>
-            <text x="138" y="44" fill="#e74c3c" font-size="9" font-family="monospace">目标</text>
-          </svg>
-        </div>
-        <div class="route-info">
-          <h3>边缘速通线 — 西侧安全通道</h3>
-          <div class="route-meta">
-            <span class="meta-tag safe">低风险</span>
-            <span class="meta-tag gold">约4分钟</span>
-            <span class="meta-tag">中等收益</span>
-          </div>
-          <ul class="route-steps">
-            <li><span class="step-num">01</span><span>从西南撤离点附近出生，沿地图边缘贴墙前进，避免进入中心热区。</span></li>
-            <li><span class="step-num">02</span><span>经过废弃工厂围墙外侧，利用掩体观察前方动静，确认安全后快速通过。</span></li>
-            <li><span class="step-num">03</span><span>进入A区建筑物，从后门进入，快速检查一楼物资箱，不上二楼（风险高）。</span></li>
-            <li><span class="step-num">04</span><span>沿建筑北墙贴行至目标楼层，完成任务后立刻原路返回，不贪恋额外物资。</span></li>
-            <li><span class="step-num">05</span><span>从西侧撤离点撤出，全程保持弯腰移动，减少被发现概率。</span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div id="route2" class="tab-content reveal">
-      <div class="route-card">
-        <div class="route-map">
-          <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <marker id="arrow2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-                <path d="M0,0 L0,6 L8,3 Z" fill="#e8c86a"/>
-              </marker>
-            </defs>
-            <rect width="300" height="300" fill="#0f1218"/>
-            <line x1="0" y1="100" x2="300" y2="100" stroke="rgba(200,168,75,0.08)" stroke-width="1"/>
-            <line x1="0" y1="200" x2="300" y2="200" stroke="rgba(200,168,75,0.08)" stroke-width="1"/>
-            <line x1="100" y1="0" x2="100" y2="300" stroke="rgba(200,168,75,0.08)" stroke-width="1"/>
-            <line x1="200" y1="0" x2="200" y2="300" stroke="rgba(200,168,75,0.08)" stroke-width="1"/>
-            <!-- Loot spots -->
-            <circle cx="80" cy="80" r="12" fill="rgba(232,200,106,0.15)" stroke="#e8c86a" stroke-width="1"/>
-            <text x="80" y="84" fill="#e8c86a" font-size="9" text-anchor="middle">💰</text>
-            <circle cx="200" cy="100" r="12" fill="rgba(232,200,106,0.15)" stroke="#e8c86a" stroke-width="1"/>
-            <text x="200" y="104" fill="#e8c86a" font-size="9" text-anchor="middle">💰</text>
-            <circle cx="150" cy="200" r="12" fill="rgba(232,200,106,0.15)" stroke="#e8c86a" stroke-width="1"/>
-            <text x="150" y="204" fill="#e8c86a" font-size="9" text-anchor="middle">💰</text>
-            <!-- Route -->
-            <polyline points="40,260 80,80 200,100 150,200 260,240"
-              fill="none" stroke="#e8c86a" stroke-width="2"
-              stroke-dasharray="6,3" marker-end="url(#arrow2)" opacity="0.8"/>
-            <circle cx="40" cy="260" r="5" fill="#27ae60"/>
-            <text x="50" y="264" fill="#27ae60" font-size="9" font-family="monospace">起点</text>
-            <circle cx="260" cy="240" r="5" fill="#e74c3c"/>
-            <text x="230" y="235" fill="#e74c3c" font-size="9" font-family="monospace">撤离</text>
-          </svg>
-        </div>
-        <div class="route-info">
-          <h3>三点收集线 — 高效物资循环</h3>
-          <div class="route-meta">
-            <span class="meta-tag" style="border-color:orange;color:orange">中等风险</span>
-            <span class="meta-tag gold">约8分钟</span>
-            <span class="meta-tag" style="border-color:#e8c86a;color:#e8c86a">高收益</span>
-          </div>
-          <ul class="route-steps">
-            <li><span class="step-num">01</span><span>出生后快速跑向西北角仓库，优先搜刮蓝色及以上品质物资箱。</span></li>
-            <li><span class="step-num">02</span><span>转向东北楼房二楼，该区域玩家稀少，物资刷新率高，重点检查医疗柜。</span></li>
-            <li><span class="step-num">03</span><span>南下前往中央建筑东侧的废弃车辆区，常有稀有材料刷新，快进快出。</span></li>
-            <li><span class="step-num">04</span><span>包满即向东南撤离点冲刺，中途不贪恋其他物资，优先撤出。</span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div id="route3" class="tab-content reveal">
-      <div class="route-card">
-        <div class="route-map">
-          <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <marker id="arrow3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-                <path d="M0,0 L0,6 L8,3 Z" fill="#e74c3c"/>
-              </marker>
-            </defs>
-            <rect width="300" height="300" fill="#0f1218"/>
-            <line x1="0" y1="150" x2="300" y2="150" stroke="rgba(200,168,75,0.08)" stroke-width="1"/>
-            <line x1="150" y1="0" x2="150" y2="300" stroke="rgba(200,168,75,0.08)" stroke-width="1"/>
-            <!-- Task objective -->
-            <rect x="120" y="120" width="60" height="60" rx="4" 
-              fill="rgba(231,76,60,0.1)" stroke="rgba(231,76,60,0.5)" stroke-width="1.5"/>
-            <text x="150" y="154" fill="rgba(231,76,60,0.8)" font-size="10" text-anchor="middle" font-family="monospace">任务点</text>
-            <!-- Fast route -->
-            <line x1="40" y1="260" x2="150" y2="150" 
-              stroke="#e74c3c" stroke-width="2.5" stroke-dasharray="8,3"
-              marker-end="url(#arrow3)" opacity="0.9"/>
-            <line x1="150" y1="150" x2="260" y2="250"
-              stroke="#e74c3c" stroke-width="2.5" stroke-dasharray="8,3"
-              marker-end="url(#arrow3)" opacity="0.9"/>
-            <circle cx="40" cy="260" r="6" fill="#27ae60"/>
-            <text x="50" y="264" fill="#27ae60" font-size="9" font-family="monospace">起点</text>
-            <circle cx="260" cy="250" r="6" fill="#27ae60"/>
-            <text x="225" y="244" fill="#27ae60" font-size="9" font-family="monospace">撤离</text>
-            <!-- Timer indicator -->
-            <text x="150" y="30" fill="rgba(231,76,60,0.6)" font-size="11" text-anchor="middle" font-family="monospace">⏱ 冲刺模式</text>
-            <text x="150" y="48" fill="rgba(200,168,75,0.4)" font-size="9" text-anchor="middle" font-family="monospace">直线距离最短路径</text>
-          </svg>
-        </div>
-        <div class="route-info">
-          <h3>任务冲刺线 — 极限速通</h3>
-          <div class="route-meta">
-            <span class="meta-tag danger">高风险</span>
-            <span class="meta-tag gold">约2分钟</span>
-            <span class="meta-tag" style="border-color:#aaa;color:#aaa">任务向</span>
-          </div>
-          <ul class="route-steps">
-            <li><span class="step-num">01</span><span>此路线用于纯任务目的，出生后立刻全速冲向任务目标点，途中不停留。</span></li>
-            <li><span class="step-num">02</span><span>保持 Sprint 状态，利用之字形跑位减少被狙击手锁定的风险。</span></li>
-            <li><span class="step-num">03</span><span>到达任务点后，完成交互，不检查周边物资，立刻掉头撤离。</span></li>
-            <li><span class="step-num">04</span><span>撤离时选择与来路不同的路线，打乱可能已经埋伏的玩家的预判。</span></li>
-            <li><span class="step-num">05</span><span>此线路适合在比赛或任务截止前的极限操作，非常规推荐。</span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- AD BANNER MID -->
+<!-- AD TOP -->
 <div class="ad-banner">
-  <span class="ad-label">广告</span>
-  <div class="ad-slot">[ 728×90 横幅广告位 · Google AdSense 中部广告 ]</div>
+  <span class="ad-tag">广告</span>
+  <div class="ad-slot"><!-- Google AdSense 728×90 横幅广告位 --></div>
 </div>
 
-<!-- TIPS WITH SIDE AD -->
-<section id="tips">
+<!-- 干员推荐 -->
+<section class="section" id="agents">
   <div class="container">
     <div class="section-header reveal">
-      <span class="section-num">03</span>
-      <div class="section-titles">
-        <h2>实战技巧</h2>
-        <p>ADVANCED TECHNIQUES — 老手都在用的生存秘技</p>
-      </div>
+      <div class="section-label">干员选择</div>
+      <h2 class="section-title">跑刀首选干员推荐</h2>
+      <p class="section-desc">不同场景下的最优干员配置，根据你的玩法风格选择最合适的干员。</p>
     </div>
+    <div class="agent-grid">
 
-    <div class="content-with-ad">
-      <div class="tips-grid">
-        <div class="tip-card reveal">
-          <span class="tip-icon">🚪</span>
-          <div class="tip-text">
-            <h4>门的艺术</h4>
-            <p>开门前先听声音，从门缝角度观察。进门后立刻关门，给自己争取反应时间。永远不要站在门口，会成为完美的靶子。</p>
-          </div>
-        </div>
-        <div class="tip-card reveal">
-          <span class="tip-icon">🦶</span>
-          <div class="tip-text">
-            <h4>走路消音</h4>
-            <p>进入建筑后改为慢走，降低脚步声。在敌人可能注意到你之前，声音管理是区分新手与老手的关键指标。</p>
-          </div>
-        </div>
-        <div class="tip-card reveal">
-          <span class="tip-icon">📦</span>
-          <div class="tip-text">
-            <h4>物资优先级</h4>
-            <p>医疗用品 > 任务物品 > 高价值材料 > 武器配件。跑刀不是武装突击，不要为枪械配件浪费背包空间。</p>
-          </div>
-        </div>
-        <div class="tip-card reveal">
-          <span class="tip-icon">🌙</span>
-          <div class="tip-text">
-            <h4>时间选择</h4>
-            <p>高峰时段前30分钟和下线高峰时段是最佳跑刀时机，玩家总量少，竞争压力低，物资相对充足。</p>
-          </div>
-        </div>
-        <div class="tip-card reveal">
-          <span class="tip-icon">🔔</span>
-          <div class="tip-text">
-            <h4>炸弹预警</h4>
-            <p>听到爆炸声立刻判断方向和距离。近距离爆炸立刻换路线，不要靠近战斗区域，交战玩家更有可能注意到你。</p>
-          </div>
-        </div>
-        <div class="tip-card reveal">
-          <span class="tip-icon">🎒</span>
-          <div class="tip-text">
-            <h4>背包管理</h4>
-            <p>出发前整理好背包槽位，留好快捷槽给医疗物品。跑刀途中整理背包会分散注意力，提前规划是关键。</p>
-          </div>
-        </div>
-        <div class="tip-card reveal">
-          <span class="tip-icon">🏃</span>
-          <div class="tip-text">
-            <h4>之字跑位</h4>
-            <p>在开阔区域移动时，使用之字形跑位而非直线冲刺。增加被狙击命中的难度，哪怕慢几秒也值得。</p>
-          </div>
-        </div>
-        <div class="tip-card reveal">
-          <span class="tip-icon">⏰</span>
-          <div class="tip-text">
-            <h4>撤离时机</h4>
-            <p>当包里物资达到目标价值的70%时就考虑撤离。人性的贪婪是跑刀最大的敌人，知道止盈才能长期盈利。</p>
-          </div>
-        </div>
-        <div class="tip-card reveal">
-          <span class="tip-icon">🗣️</span>
-          <div class="tip-text">
-            <h4>声东击西</h4>
-            <p>遭遇玩家时，可以先朝一个方向扔物品制造声音，趁对方注意力转移时从另一侧绕过或逃脱。</p>
-          </div>
+      <div class="agent-card reveal">
+        <span class="agent-tier tier-s">S 级推荐</span>
+        <div class="agent-name">蜂医</div>
+        <div class="agent-role">支援型 · 老手首选</div>
+        <p class="agent-desc">跑刀上限最高的干员。短烟+长烟双烟雾弹极大提升生存能力，激素枪自带续航，遭遇战也能保持状态。老手玩家的不二之选，混烟能力和保命手段无出其右。</p>
+        <div class="agent-tags">
+          <span class="tag tag-gold">双烟雾弹</span>
+          <span class="tag tag-green">自带续航</span>
+          <span class="tag tag-blue">保命能力强</span>
         </div>
       </div>
 
-      <!-- SIDE AD -->
-      <div class="ad-side reveal">
-        <span class="ad-label">广告</span>
-        <div class="ad-side-slot">[ 240×250<br>侧边广告位<br>AdSense ]</div>
+      <div class="agent-card reveal">
+        <span class="agent-tier tier-s">S 级推荐</span>
+        <div class="agent-name">红狼</div>
+        <div class="agent-role">突击型 · 机密图首选</div>
+        <p class="agent-desc">机密/绝密图跑刀首选。开大后移速极快，能跑赢大多数追击，直奔撤离点效率极高。战备成本低（约7万），失败损失有限，成功收益巨大，每把约50万起步。</p>
+        <div class="agent-tags">
+          <span class="tag tag-gold">移速最快</span>
+          <span class="tag tag-gold">低成本入场</span>
+          <span class="tag tag-blue">技能脱离强</span>
+        </div>
       </div>
+
+      <div class="agent-card reveal">
+        <span class="agent-tier tier-a">A 级推荐</span>
+        <div class="agent-name">威龙</div>
+        <div class="agent-role">突击型 · 抢保险专用</div>
+        <p class="agent-desc">C4加速技能让威龙成为抢大保险的最快干员。适合有3×3安全箱的玩家玩自爆流，三分钟一把效率极高。注意：如果队友也选威龙，保险可能抢不过。</p>
+        <div class="agent-tags">
+          <span class="tag tag-blue">抢保险最快</span>
+          <span class="tag tag-gold">自爆流</span>
+          <span class="tag tag-red">需3×3安全箱</span>
+        </div>
+      </div>
+
+      <div class="agent-card reveal">
+        <span class="agent-tier tier-a">A 级推荐</span>
+        <div class="agent-name">骇爪</div>
+        <div class="agent-role">侦察型 · 新手友好</div>
+        <p class="agent-desc">信号破译器可标记敌方位置及装备等级，信息优势显著。新手不会判断声音信息，用骇爪技能直接获取敌方动向，避免被伏击。下限最高，最适合萌新跑刀。</p>
+        <div class="agent-tags">
+          <span class="tag tag-green">新手友好</span>
+          <span class="tag tag-blue">信息优势</span>
+          <span class="tag tag-gold">下限最高</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<hr class="divider">
-
-<!-- GEAR -->
-<section id="gear" class="gear-section">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="section-num">04</span>
-      <div class="section-titles">
-        <h2>跑刀装备</h2>
-        <p>LOADOUT GUIDE — 最优跑刀配装推荐</p>
-      </div>
-    </div>
-    <div class="reveal" style="overflow-x:auto;">
-      <table class="gear-table">
-        <thead>
-          <tr>
-            <th>装备类型</th>
-            <th>推荐选择</th>
-            <th>推荐理由</th>
-            <th>性价比</th>
-            <th>跑刀评分</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>近战武器</td>
-            <td class="name">战术匕首</td>
-            <td>重量最轻，移速损失最小，遭遇时有一定自保能力</td>
-            <td>★★★★★</td>
-            <td><span class="stars">★★★★★</span></td>
-          </tr>
-          <tr>
-            <td>副武器</td>
-            <td class="name">基础手枪</td>
-            <td>紧急情况自保用，不影响移速，弹药轻便</td>
-            <td>★★★★☆</td>
-            <td><span class="stars">★★★★☆</span></td>
-          </tr>
-          <tr>
-            <td>防弹衣</td>
-            <td class="name">轻型防弹衣</td>
-            <td>提供基础防护同时保持机动性，不选重甲</td>
-            <td>★★★★☆</td>
-            <td><span class="stars">★★★★☆</span></td>
-          </tr>
-          <tr>
-            <td>头盔</td>
-            <td class="name">头盔 Lv.2</td>
-            <td>性价比最优，防护足够日常跑刀，不过于昂贵</td>
-            <td>★★★★★</td>
-            <td><span class="stars">★★★★☆</span></td>
-          </tr>
-          <tr>
-            <td>背包</td>
-            <td class="name">标准战术包</td>
-            <td>容量足够收集目标物资，不携带超大背包影响机动</td>
-            <td>★★★★★</td>
-            <td><span class="stars">★★★★★</span></td>
-          </tr>
-          <tr>
-            <td>医疗</td>
-            <td class="name">急救包×3</td>
-            <td>遭遇战后快速回血，务必携带，生死关键</td>
-            <td>★★★★★</td>
-            <td><span class="stars">★★★★★</span></td>
-          </tr>
-          <tr>
-            <td>手雷</td>
-            <td class="name">烟雾弹×2</td>
-            <td>遭遇多人时制造烟雾掩护逃跑，跑刀必备道具</td>
-            <td>★★★★☆</td>
-            <td><span class="stars">★★★★★</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- DANGER ZONES -->
-<section id="zones">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="section-num">05</span>
-      <div class="section-titles">
-        <h2>区域风险</h2>
-        <p>DANGER ZONES — 各区域威胁等级评估</p>
-      </div>
-    </div>
-    <div class="zone-list">
-      <div class="zone-item reveal">
-        <div class="zone-level high">危</div>
-        <div class="zone-info">
-          <h4>地图中心区域 — 高威胁</h4>
-          <p>所有玩家的必争之地，永远有埋伏和交火。跑刀玩家应完全避开，除非有极高价值目标且有完整逃脱方案。开局15分钟内中心区人最多，此时绝对不要靠近。</p>
-        </div>
-      </div>
-      <div class="zone-item reveal">
-        <div class="zone-level high">危</div>
-        <div class="zone-info">
-          <h4>高价值建筑物内 — 高威胁</h4>
-          <p>银行、军火库、医院等高价值建筑内玩家密度极高，且多数携带重型武器。如必须进入，选择非主要入口，快进快出，不在内部停留超过60秒。</p>
-        </div>
-      </div>
-      <div class="zone-item reveal">
-        <div class="zone-level med">中</div>
-        <div class="zone-info">
-          <h4>主要道路和通道 — 中等威胁</h4>
-          <p>玩家移动的必经之路，有一定概率遭遇。沿墙移动，不走路中间。遭遇玩家时优先判断对方意图，多数情况下双方都想活着撤离而不是主动交战。</p>
-        </div>
-      </div>
-      <div class="zone-item reveal">
-        <div class="zone-level med">中</div>
-        <div class="zone-info">
-          <h4>撤离点附近 — 中等威胁</h4>
-          <p>撤离点是玩家聚集地，常有玩家在附近蹲守"捡漏"。提前侦察撤离路线，观察附近是否有异动，选择多个备用撤离点，不要只押注一条路。</p>
-        </div>
-      </div>
-      <div class="zone-item reveal">
-        <div class="zone-level low">安</div>
-        <div class="zone-info">
-          <h4>地图边缘区域 — 低威胁</h4>
-          <p>玩家密度最低，物资品质一般但数量稳定。适合新手跑刀练习和低风险积累。熟悉地图边缘路线后，可以作为快速横穿地图的安全通道。</p>
-        </div>
-      </div>
-      <div class="zone-item reveal">
-        <div class="zone-level low">安</div>
-        <div class="zone-info">
-          <h4>已扫荡区域 — 低威胁</h4>
-          <p>其他玩家已经搜刮过的区域往往被忽视，玩家不会二次光顾。物资已被拿走，但安全性极高，可以用作安全通道或等待时机的临时藏身处。</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- AD BANNER BOTTOM -->
+<!-- AD MID -->
 <div class="ad-banner">
-  <span class="ad-label">广告</span>
-  <div class="ad-slot">[ 728×90 横幅广告位 · 底部广告 ]</div>
+  <span class="ad-tag">广告</span>
+  <div class="ad-slot"><!-- Google AdSense 728×90 中部广告位 --></div>
+</div>
+
+<!-- 地图攻略 -->
+<section class="section section-alt" id="maps">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">地图攻略</div>
+      <h2 class="section-title">三大地图跑刀路线详解</h2>
+      <p class="section-desc">从新手大坝到高端巴克什，每张地图的最优跑刀路线与物资点位全收录。</p>
+    </div>
+
+    <div class="map-tabs">
+      <button class="map-tab active" onclick="switchMap('daba', this)">零号大坝</button>
+      <button class="map-tab" onclick="switchMap('gong', this)">长弓溪谷</button>
+      <button class="map-tab" onclick="switchMap('bksh', this)">巴克什</button>
+    </div>
+
+    <!-- 零号大坝 -->
+    <div id="daba" class="map-panel active reveal">
+      <div class="map-routes">
+        <div class="route-item">
+          <div class="route-num">01</div>
+          <div>
+            <div class="route-title">破产萌新线 — 小变电+游客中心</div>
+            <p class="route-body">最推荐新手的入门路线，零成本下图。跑刀不进高资源区，重点刷小变电站（2个点）和游客中心（2个点），每个点都能吃到额外物资。在哪复活都有东西可搜，风险极低。游客中心买2张房卡性价比极高，售票办公室推荐指数四星，必买。</p>
+            <div class="route-meta">
+              <span class="meta-pill pill-green">零成本</span>
+              <span class="meta-pill pill-green">新手友好</span>
+              <span class="meta-pill pill-yellow">约15-20万/局</span>
+            </div>
+          </div>
+        </div>
+        <div class="route-item">
+          <div class="route-num">02</div>
+          <div>
+            <div class="route-title">军营快搜线 — 避盾兵进烟策略</div>
+            <p class="route-body">军营一楼正入口必刷盾兵，进点优先选医生角色，直接扔点烟进点。一楼左右两边桌子都刷物资，看完直接出来扔烟上二楼。二楼钥匙基本必买，主刷电子元件和CPU，价值稳定。开服或新赛季初期此线收益尤其高，可做到利滚利。</p>
+            <div class="route-meta">
+              <span class="meta-pill pill-yellow">低-中风险</span>
+              <span class="meta-pill pill-yellow">约20-40万/局</span>
+              <span class="meta-pill pill-yellow">需要烟雾弹</span>
+            </div>
+          </div>
+        </div>
+        <div class="route-item">
+          <div class="route-num">03</div>
+          <div>
+            <div class="route-title">开卡流 — 13个钥匙房全攻略</div>
+            <p class="route-body">大坝共13个钥匙房：游客中心2个、变电站2个（含技术室）、水泥厂2个、行政辖区东楼3个+西楼3个、军营1个。跑刀路线建议：小变电+游客中心2卡（日常跑刀）；猛攻路线：变电站技术室+行政楼5卡。买全套钥匙卡每局收益极为稳定。</p>
+            <div class="route-meta">
+              <span class="meta-pill pill-yellow">中等风险</span>
+              <span class="meta-pill pill-yellow">需要钥匙卡</span>
+              <span class="meta-pill pill-red">约50-100万/局</span>
+            </div>
+          </div>
+        </div>
+        <div class="route-item">
+          <div class="route-num">04</div>
+          <div>
+            <div class="route-title">机密大坝 — 卡战备进图策略</div>
+            <p class="route-body">机密大坝投入约7万哈夫币卡战备，推荐用机枪或狙击枪（交易行水分大，实际可以6万买到10万战备的装备）。红狼/威龙入场，开局看有没有就近大保险直接吃，塞满安全箱后直奔撤离。失败损失7万，成功收益50万+，运气好百万以上。</p>
+            <div class="route-meta">
+              <span class="meta-pill pill-red">高风险</span>
+              <span class="meta-pill pill-yellow">成本约7万</span>
+              <span class="meta-pill pill-red">约50万+/局</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="map-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-title">▸ 推荐钥匙房价值</div>
+          <ul class="key-list">
+            <li><span class="key-name">售票办公室</span><span class="key-stars">★★★★</span></li>
+            <li><span class="key-name">中心贵宾室</span><span class="key-stars">★★★</span></li>
+            <li><span class="key-name">变电站技术室</span><span class="key-stars">★★★★★</span></li>
+            <li><span class="key-name">行政楼情报室</span><span class="key-stars">★★★★★</span></li>
+            <li><span class="key-name">军营二楼</span><span class="key-stars">★★★</span></li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-title">▸ 各玩法收益对比</div>
+          <div class="income-bar">
+            <div class="income-row">
+              <div class="income-label"><span>破产跑刀线</span><span>15-20万</span></div>
+              <div class="income-track"><div class="income-fill" style="width:30%"></div></div>
+            </div>
+            <div class="income-row">
+              <div class="income-label"><span>普坝开卡流</span><span>30-60万</span></div>
+              <div class="income-track"><div class="income-fill" style="width:55%"></div></div>
+            </div>
+            <div class="income-row">
+              <div class="income-label"><span>机密大坝</span><span>50-100万</span></div>
+              <div class="income-track"><div class="income-fill" style="width:75%"></div></div>
+            </div>
+            <div class="income-row">
+              <div class="income-label"><span>出红/出卡</span><span>500万+</span></div>
+              <div class="income-track"><div class="income-fill" style="width:100%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 长弓溪谷 -->
+    <div id="gong" class="map-panel reveal">
+      <div class="map-routes">
+        <div class="route-item">
+          <div class="route-num">01</div>
+          <div>
+            <div class="route-title">打野外围线 — 村庄+庄园+旧址</div>
+            <p class="route-body">打野位重点：村庄、庄园、旧址、牧场2、小车站、码头右。S3及以后旧址和庄园、牧场2、小车站与村庄大概率互斥刷点，两边同时有活人概率不大。打完野后可前往检查站开卡，公认爆率很高的蓝卡点。</p>
+            <div class="route-meta">
+              <span class="meta-pill pill-green">低风险</span>
+              <span class="meta-pill pill-yellow">约15-25万/局</span>
+            </div>
+          </div>
+        </div>
+        <div class="route-item">
+          <div class="route-num">02</div>
+          <div>
+            <div class="route-title">火车站拉火车 — 快速撤离技巧</div>
+            <p class="route-body">村庄和小火车站打完野后前往大车站拉火车，记得一定要快速拉闸，最好是刚进站就拉，这样被逮住的概率能降低很多。码头右建议开局自雷，或者祈祷刷在码头的另一队全去酒店没来码头。</p>
+            <div class="route-meta">
+              <span class="meta-pill pill-yellow">中等风险</span>
+              <span class="meta-pill pill-yellow">需要快速执行</span>
+              <span class="meta-pill pill-yellow">约20-40万/局</span>
+            </div>
+          </div>
+        </div>
+        <div class="route-item">
+          <div class="route-num">03</div>
+          <div>
+            <div class="route-title">检查站蓝卡点 — 稳定收益核心</div>
+            <p class="route-body">长弓溪谷检查站是公认的高爆率蓝卡刷新点，牧场2和旧址打完野后都可绕道经过。建议提前买好对应的蓝卡，结合外围打野，单局收益可以做到相当稳定，适合日常农币。</p>
+            <div class="route-meta">
+              <span class="meta-pill pill-green">低-中风险</span>
+              <span class="meta-pill pill-green">需要蓝卡</span>
+              <span class="meta-pill pill-yellow">约30-50万/局</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="map-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-title">▸ 打野点位优先级</div>
+          <ul class="key-list">
+            <li><span class="key-name">检查站（蓝卡）</span><span class="key-stars">★★★★★</span></li>
+            <li><span class="key-name">旧址/庄园</span><span class="key-stars">★★★★</span></li>
+            <li><span class="key-name">村庄</span><span class="key-stars">★★★</span></li>
+            <li><span class="key-name">小车站</span><span class="key-stars">★★★</span></li>
+            <li><span class="key-name">码头右</span><span class="key-stars">★★（建议自雷）</span></li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-title">▸ 地图收益对比</div>
+          <div class="income-bar">
+            <div class="income-row">
+              <div class="income-label"><span>纯打野</span><span>15-25万</span></div>
+              <div class="income-track"><div class="income-fill" style="width:25%"></div></div>
+            </div>
+            <div class="income-row">
+              <div class="income-label"><span>打野+开卡</span><span>30-50万</span></div>
+              <div class="income-track"><div class="income-fill" style="width:50%"></div></div>
+            </div>
+            <div class="income-row">
+              <div class="income-label"><span>拉火车撤离</span><span>40-80万</span></div>
+              <div class="income-track"><div class="income-fill" style="width:70%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 巴克什 -->
+    <div id="bksh" class="map-panel reveal">
+      <div class="map-routes">
+        <div class="route-item">
+          <div class="route-num">01</div>
+          <div>
+            <div class="route-title">绝密巴克什 — 巴别塔左右线</div>
+            <p class="route-body">必刷点位（满编队）：巴别塔左、巴别塔右、集市、樱桃小镇。塔左：刷卡进塔，只吃高爆容器，海洋跑步机和审讯的沙发是刷红点位，记得检查。塔右：同样刷卡进塔，医疗一楼的沙发是刷卡点，门诊一楼看刷香槟和大红，鳄鱼房可看心或医疗大红。</p>
+            <div class="route-meta">
+              <span class="meta-pill pill-red">高风险</span>
+              <span class="meta-pill pill-red">满编队必争</span>
+              <span class="meta-pill pill-red">需要房卡</span>
+            </div>
+          </div>
+        </div>
+        <div class="route-item">
+          <div class="route-num">02</div>
+          <div>
+            <div class="route-title">二刷一线 — 蓄水区+遗址</div>
+            <p class="route-body">二刷一路线：蓄水区/营地、遗址/装卸区。三刷二路线：巴别塔前、山城、大浴场。此类路线竞争相对较小，适合不想硬刚主T区的玩家。遗址和装卸区刷新较稳定，时常有高价值材料。</p>
+            <div class="route-meta">
+              <span class="meta-pill pill-yellow">中等风险</span>
+              <span class="meta-pill pill-yellow">竞争较少</span>
+              <span class="meta-pill pill-yellow">约60-120万/局</span>
+            </div>
+          </div>
+        </div>
+        <div class="route-item">
+          <div class="route-num">03</div>
+          <div>
+            <div class="route-title">航天基地 — 门槛与配合要求</div>
+            <p class="route-body">进入航天基地需携带价值35万哈夫币装备（官方计价，非交易行价格）。推荐穿四级套+改装G18C手枪，达标且成本较低。职业配合要求高：医生维持状态、露娜/骇爪侦察，遇强敌有机会打，没机会就跑。绝密航天教学称"牢一位得吃320万"。</p>
+            <div class="route-meta">
+              <span class="meta-pill pill-red">极高风险</span>
+              <span class="meta-pill pill-red">门槛35万战备</span>
+              <span class="meta-pill pill-red">约100-320万/局</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="map-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-title">▸ 巴克什物资点评级</div>
+          <ul class="key-list">
+            <li><span class="key-name">巴别塔左右（刷卡）</span><span class="key-stars">★★★★★</span></li>
+            <li><span class="key-name">大浴场</span><span class="key-stars">★★★★</span></li>
+            <li><span class="key-name">集市</span><span class="key-stars">★★★★</span></li>
+            <li><span class="key-name">遗址/装卸区</span><span class="key-stars">★★★</span></li>
+            <li><span class="key-name">蓄水区</span><span class="key-stars">★★★</span></li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-title">▸ 预估收益</div>
+          <div class="income-bar">
+            <div class="income-row">
+              <div class="income-label"><span>普通区域</span><span>30-60万</span></div>
+              <div class="income-track"><div class="income-fill" style="width:35%"></div></div>
+            </div>
+            <div class="income-row">
+              <div class="income-label"><span>塔左右开卡</span><span>80-150万</span></div>
+              <div class="income-track"><div class="income-fill" style="width:65%"></div></div>
+            </div>
+            <div class="income-row">
+              <div class="income-label"><span>航天基地</span><span>100-320万</span></div>
+              <div class="income-track"><div class="income-fill" style="width:90%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 实战技巧 -->
+<section class="section" id="tips">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">实战技巧</div>
+      <h2 class="section-title">老手才知道的跑刀心法</h2>
+      <p class="section-desc">从萌新到老鸟，这些实战经验会让你的撤离率显著提升。</p>
+    </div>
+    <div class="tips-layout">
+      <div class="tips-list">
+        <div class="tip-item reveal">
+          <div class="tip-num">01</div>
+          <div>
+            <div class="tip-title">安全箱优先塞满才是关键</div>
+            <p class="tip-body">跑刀的核心在于安全箱，好东西第一时间入箱，这是本局保底收益。3×3安全箱价值远高于2×2，有条件优先升级。塞满安全箱后才考虑背包里的额外收益。</p>
+          </div>
+        </div>
+        <div class="tip-item reveal">
+          <div class="tip-num">02</div>
+          <div>
+            <div class="tip-title">爆率机制要了解</div>
+            <p class="tip-body">赛季更新时爆率拉满，随着搜索容器增多，爆率逐渐降低（绝密、机密、普通分开计算，根据最近十局计算）。亏损太多会触发补偿机制，出现1-2把高爆率的补偿局。新账号或赛季初期收纳盒出率离谱，优先抓住这个窗口期。</p>
+          </div>
+        </div>
+        <div class="tip-item reveal">
+          <div class="tip-num">03</div>
+          <div>
+            <div class="tip-title">战备卡不要买交易行原价</div>
+            <p class="tip-body">交易行的背包和胸挂严重溢价，机枪和狙击枪水分最大，可以用6万买到标价10万的战备。进机密图之前，逐个检查枪械备注里的战备价值，再配上胸挂和背包即可，不推荐买好包。</p>
+          </div>
+        </div>
+        <div class="tip-item reveal">
+          <div class="tip-num">04</div>
+          <div>
+            <div class="tip-title">主变电站下方出生是噩梦点</div>
+            <p class="tip-body">大坝主变电站下方是公认最差出生点，上方另一队有60%概率往下走，保险都没开完对面就到了。如果刷在此点，有钥匙就直接硬开保险，快速塞箱后立刻考虑撤退，不要贪。</p>
+          </div>
+        </div>
+        <div class="tip-item reveal">
+          <div class="tip-num">05</div>
+          <div>
+            <div class="tip-title">遭遇玩家的心理博弈</div>
+            <p class="tip-body">跑刀遇到全装玩家不一定要跑。对方看到你手里只有刀，大概率不会浪费时间追。如果对方主动追击，使用烟雾弹制造掩护，往开阔地跑（全装更重，跑不过跑刀）。蜂医双烟雾弹让追兵几乎望尘莫及。</p>
+          </div>
+        </div>
+        <div class="tip-item reveal">
+          <div class="tip-num">06</div>
+          <div>
+            <div class="tip-title">放弃半改枪，干脆不带枪</div>
+            <p class="tip-body">半改的枪用着不顺手，全改的舍不得用。跑刀就是直接上小刀进图跑，不要为了那点战斗力带半改枪——半改枪既是负担又是风险，掉了还心疼。真要自保带把G18C手枪成本低且足够用。</p>
+          </div>
+        </div>
+        <div class="tip-item reveal">
+          <div class="tip-num">07</div>
+          <div>
+            <div class="tip-title">单排不配队友，丢包即撤</div>
+            <p class="tip-body">单排跑刀效率最高，不用等队友，不用分物资。关键词：大单挂+听力头+哈夫克背心，安全箱塞满后果断丢包撤离，不贪额外背包物资。包里的东西再多，活着回来才是赢。</p>
+          </div>
+        </div>
+        <div class="tip-item reveal">
+          <div class="tip-num">08</div>
+          <div>
+            <div class="tip-title">撤离路线每局要变化</div>
+            <p class="tip-body">不要每局走同一条撤离路线，这会让蹲守玩家掌握你的规律。打完目标点后，至少准备两条撤离备选路线，根据枪声和队友状态动态选择，大幅降低被伏击概率。</p>
+          </div>
+        </div>
+      </div>
+      <div class="ad-side-wrap">
+        <div class="ad-side">
+          <span class="ad-tag">广告</span>
+          <div class="ad-side-slot"><!-- AdSense 300×250 侧边广告位 --></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-title">▸ 跑刀必带物资清单</div>
+          <ul class="key-list">
+            <li><span class="key-name">急救包</span><span class="key-val">×3</span></li>
+            <li><span class="key-name">烟雾弹</span><span class="key-val">×2</span></li>
+            <li><span class="key-name">体能提升药剂</span><span class="key-val">×1</span></li>
+            <li><span class="key-name">目标地图房卡</span><span class="key-val">视情况</span></li>
+            <li><span class="key-name">3×3安全箱</span><span class="key-val">必备</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 收益分析 -->
+<section class="section section-alt" id="income">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">收益分析</div>
+      <h2 class="section-title">各地图跑刀收益对比</h2>
+      <p class="section-desc">基于实测数据的收益分析，根据你的风险偏好选择最适合的玩法。</p>
+    </div>
+    <div class="income-grid">
+      <div class="income-card reveal">
+        <div class="map-name">零号大坝（普通）</div>
+        <div class="map-mode">机密行动 · 新手推荐</div>
+        <span class="risk-badge risk-low">低风险</span>
+        <span class="income-num">15-30万</span>
+        <div class="income-unit">哈夫币 / 局（约10-15分钟）</div>
+        <div class="income-detail">
+          <span>投入成本：</span>零到几个医疗物品<br>
+          <span>时间效率：</span>一小时约100万<br>
+          <span>推荐玩法：</span>小变电+游客中心打野<br>
+          <span>特别说明：</span>出红出卡单局可破千万
+        </div>
+      </div>
+      <div class="income-card reveal">
+        <div class="map-name">零号大坝（机密）</div>
+        <div class="map-mode">机密行动 · 进阶玩法</div>
+        <span class="risk-badge risk-mid">中等风险</span>
+        <span class="income-num">40-100万</span>
+        <div class="income-unit">哈夫币 / 局（约7-10分钟）</div>
+        <div class="income-detail">
+          <span>投入成本：</span>约7万（卡战备）<br>
+          <span>时间效率：</span>一小时约300-500万<br>
+          <span>推荐干员：</span>红狼/威龙<br>
+          <span>特别说明：</span>哪哪都是人，撤离率较低
+        </div>
+      </div>
+      <div class="income-card reveal">
+        <div class="map-name">绝密巴克什</div>
+        <div class="map-mode">绝密行动 · 高端玩法</div>
+        <span class="risk-badge risk-high">高风险</span>
+        <span class="income-num">100-320万</span>
+        <div class="income-unit">哈夫币 / 局（约7-12分钟）</div>
+        <div class="income-detail">
+          <span>投入成本：</span>约35万门槛战备<br>
+          <span>时间效率：</span>视撤离率波动极大<br>
+          <span>推荐干员：</span>蜂医+骇爪+红狼<br>
+          <span>特别说明：</span>出一把可能顶普坝一天
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">常见问题</div>
+      <h2 class="section-title">跑刀玩家最常问的问题</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">跑刀被人追怎么办？</div>
+        <div class="faq-a">优先使用烟雾弹制造掩护，向开阔地带跑（全装玩家移速比你慢）。蜂医双烟雾弹是最有效的脱离手段。如果是红狼，直接开大跑路，速度碾压追击者。实在跑不掉，找有门的建筑进去再关门，利用建筑内部结构甩脱追击。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">安全箱多大才合适？</div>
+        <div class="faq-a">3×3安全箱是跑刀的分水岭。有3×3可以玩自爆威龙速通，效率极高。2×2效率减半，勉强够用。优先把升级安全箱列为第一目标，比任何武器配件都更值得投资。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">跑刀被判定为消极比赛进小黑屋怎么办？</div>
+        <div class="faq-a">威龙自爆流确实存在被判定消极比赛的风险。建议每把都正常搜刮再撤离，不要开局直接自爆。普通跑刀路线（搜刮+撤离）不会触发消极判定，放心玩。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">新手第一张图推荐哪个？</div>
+        <div class="faq-a">强烈推荐从零号大坝普通图开始。地图不大，不容易迷路，物资点分布合理。航天基地等图对地图熟悉度和武器操作要求极高，萌新进去基本都是送包。先把大坝练熟，再逐步挑战高端图。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">爆率感觉越来越低是什么原因？</div>
+        <div class="faq-a">游戏存在爆率条机制，赛季初爆率最高，随着搜索容器数量增加，爆率逐渐降低。绝密、机密、普通三档分开计算，根据最近十局动态调整。如果连续亏损，会触发1-2局的补偿局，此时爆率会显著提高，把握住补偿局机会。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">单排和组排哪个跑刀效率高？</div>
+        <div class="faq-a">单排效率更高：不用等队友、不用分物资、决策更快、撤离更灵活。组排适合相互配合的老友局，可以分工（一人清NPC，一人搜刮，一人守撤离点）。陌生人组排跑刀体验较差，容易因为意见分歧影响效率。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AD BOTTOM -->
+<div class="ad-banner">
+  <span class="ad-tag">广告</span>
+  <div class="ad-slot"><!-- Google AdSense 728×90 底部广告位 --></div>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">刀客传说</div>
-  <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:1rem">三角洲行动跑刀玩家的最终归宿</p>
-  <div class="footer-links">
-    <a href="#">首页</a>
-    <a href="#">攻略更新</a>
-    <a href="#">视频教程</a>
-    <a href="#">社区论坛</a>
-    <a href="#">关于我们</a>
-    <a href="#">广告合作</a>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">三角洲跑刀指南</div>
+        <p>专注三角洲行动跑刀玩法，持续更新最新赛季攻略，帮助每一位干员稳定撤离。</p>
+      </div>
+      <div class="footer-links">
+        <h4>攻略内容</h4>
+        <ul>
+          <li><a href="#agents">干员选择</a></li>
+          <li><a href="#maps">地图攻略</a></li>
+          <li><a href="#tips">实战技巧</a></li>
+          <li><a href="#income">收益分析</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>关于本站</h4>
+        <ul>
+          <li><a href="#">隐私政策</a></li>
+          <li><a href="#">免责声明</a></li>
+          <li><a href="#">广告合作</a></li>
+          <li><a href="#">内容投稿</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 三角洲跑刀指南 · 内容仅供游戏参考，与腾讯官方无关</p>
+      <p class="icp">备案号：待备案 · mnpxt.cn</p>
+    </div>
   </div>
-  <p class="footer-copy">© 2024 刀客传说 · 本站内容仅供游戏参考，与官方无关 · 保留所有权利</p>
 </footer>
 
 <script>
 // Tab switching
-function switchTab(id, btn) {
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+function switchMap(id, btn) {
+  document.querySelectorAll('.map-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.map-tab').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
 }
 
-// Scroll reveal
-const observer = new IntersectionObserver((entries) => {
+// FAQ
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// Reveal on scroll
+const io = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('visible'), i * 60);
-      observer.unobserve(e.target);
+      setTimeout(() => e.target.classList.add('in'), i * 80);
+      io.unobserve(e.target);
     }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// Nav scroll effect
+// Sticky nav shrink
 window.addEventListener('scroll', () => {
-  const nav = document.querySelector('nav');
-  nav.style.padding = window.scrollY > 50 ? '0.6rem 2rem' : '1rem 2rem';
+  document.querySelector('nav').style.height = window.scrollY > 60 ? '50px' : '60px';
 });
 </script>
 </body>
